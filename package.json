@@ -1,0 +1,29 @@
+{
+  "name": "soc_app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stekuz/soc_app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stekuz/soc_app/issues"
+  },
+  "homepage": "https://github.com/stekuz/soc_app#readme",
+  "dependencies": {
+    "crypto-js": "^4.1.1",
+    "express": "^4.17.3",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.3.3",
+    "nodemon": "^2.0.16",
+    "request": "^2.88.2",
+    "socket.io": "^4.5.0",
+    "uuid": "^8.3.2"
+  },
+  "description": ""
+}

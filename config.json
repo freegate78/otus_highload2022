@@ -1,0 +1,17 @@
+{
+    "db":{
+        "host":"localhost",
+        "user":"root",
+        "database":"testdb",
+        "password":"password"
+    },
+    "query":{
+        "changeUserInfo":"UPDATE `users` SET `name`=?, `surname`=?, `hobby`=?, `city`=?, `gender`=?, `age`=? WHERE `username`=? AND `password`=?;",
+        "createRelation":"INSERT INTO `relations` (`followed`, `follower`) VALUES (?, ?);",
+        "follow":"SELECT * FROM `users` WHERE `username` = ? AND `password` = ? OR `username`=?;",
+        "searchUser":"SELECT * FROM `users` WHERE `username` = ?;",
+        "searchFollowed":"SELECT * FROM `relations` WHERE `follower`=?",
+        "signUp":"INSERT INTO `users` (`id`, `username`, `password`, `name`, `surname`, `hobby`, `city`, `gender`, `age`) VALUES (?,?,?,?,?,?,?,?,?);",
+        "signIn":"SELECT * FROM `users` WHERE `username` = ? AND password = ?;"
+    }
+}

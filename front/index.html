@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+        <h3>Авторизация</h3>
+        <input type="text" placeholder="Имя пользователя" id="usernameIn">
+        <input type="password" placeholder="Пароль" id="passwordIn">
+        <button onpointerdown="SignIn()">Войти</button>
+        <br></br>
+        <h3>Регистрация</h3>
+        <input type="text" placeholder="Имя пользователя" id="usernameUp">
+        <input type="password" placeholder="Пароль" id="passwordUp">
+        <input type="text" placeholder="Фамилия" id="surname">
+        <input type="text" placeholder="Имя" id="name">
+        <input type="text" placeholder="Пол" id="gender">
+        <input type="text" placeholder="Возраст" id="age">
+        <input type="text" placeholder="Интересы" id="hobby">
+        <input type="text" placeholder="Город" id="city">
+        <button onpointerdown="SignUp()">Зарегистрироваться</button>
+        <script src="./socket.io.4.5.min.js"></script>
+        <script async src="./script.js"></script>
+    </body>
+</html>
