@@ -19,6 +19,7 @@ app.get('/', (req, res) => {
 });
 
 function ChangeUserInfo(body){
+    if(body===undefined)return;
     const connection = mysql.createConnection(config.db);
     connection.execute(
         config.query.changeUserInfo,
@@ -65,7 +66,7 @@ function Follow(body){
     connection.end();
 }
 
-function SearchUser(body){
+function SearchUser(body,socket){
     const connection = mysql.createConnection(config.db);
     connection.execute(
         config.query.searchUser,
@@ -73,7 +74,7 @@ function SearchUser(body){
         (err,user)=>{
             if(err)console.log(err);
             else if(user.length>0){
-                io.emit('infoToUser', `
+                socket.emit('infoToUser', `
 
                 <h3>Поиск</h3>
                 <input type="text" placeholder="username" id="search">
@@ -99,7 +100,7 @@ function SearchUser(body){
     connection.end();
 }
 
-function SignIn(body){
+function SignIn(body,socket){
     const connection = mysql.createConnection(config.db);
     connection.execute(
         config.query.signIn,
@@ -123,8 +124,8 @@ function SignIn(body){
 
                         for(let i=0;i<followed.length;i++) htmlToUser += '<br>' + followed[i];
 
-                        io.emit('setCookie', user[0].username);
-                        io.emit('infoToUser', `
+                        socket.emit('setCookie', user[0].username);
+                        socket.emit('infoToUser', `
 
                         <h3>Поиск</h3>
                         <input type="text" placeholder="username" id="search">
@@ -138,7 +139,7 @@ function SignIn(body){
                         <input type="text" placeholder="Возраст" id="age" value="${user[0].age}">
                         <input type="text" placeholder="Интересы" id="hobby" value="${user[0].hobby}">
                         <input type="text" placeholder="Город" id="city" value="${user[0].city}">
-                        <input type="password" placeholder="Пароль" id="password">
+                        <input type="password" placeholder="Пароль для подтверждения" id="password">
                         <button onpointerdown="SubmitInfo()">Отправить изменения</button>
                         <br></br>
                         <h3>Друзья</h3>
@@ -157,6 +158,7 @@ function SignIn(body){
 }
 
 function SignUp(body){
+    if(body===undefined)return;
     const connection = mysql.createConnection(config.db);
     connection.execute(
         config.query.signUp,
@@ -179,8 +181,8 @@ function SignUp(body){
 io.on('connection', (socket)=>{
     socket.on('changeUserInfo', ChangeUserInfo);
     socket.on('follow', Follow);
-    socket.on('searchUser', SearchUser);
-    socket.on('signIn', SignIn);
+    socket.on('searchUser', body=>SearchUser(body, socket));
+    socket.on('signIn', body=>SignIn(body, socket));
     socket.on('signUp', SignUp);
 });
 
@@ -201,7 +203,7 @@ users table
     hobby varchar(255),
     city varchar(255),
     gender varchar(255),
-    age int(255)
+    age varchar(255)
 
 -------------------
 
